@@ -33,7 +33,7 @@ def create_ticket(request):
         form = TicketForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')  # Redirect to a success page
+            return redirect('/tickets')  # Redirect to a success page
     else:
         form = TicketForm()
     

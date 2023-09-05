@@ -9,7 +9,7 @@ def home(request):
 def ticket(request, project_name):
     project = get_object_or_404(Project, project_name=project_name)
     tickets = Ticket.objects.all()
-    return render(request, 'tickets.html', {'project':project})
+    return render(request, 'tickets.html', {'project':project,'tickets':tickets})
 
 def create_project(request):
     if request.method == 'POST':

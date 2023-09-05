@@ -67,9 +67,9 @@
                 <div class="md:flex-grow">
                   <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ project.project_name }}</h2>
                   <p class="leading-relaxed">{{ project.project_description }}</p>
-                  <a href="{% url 'delete_project' project_name=project.project_name %}"  class="text-red-500 inline-flex mx-5 items-center mt-4">Delete
+                  <a href="/delete_project/{{ project.project_name }}"  class="text-red-500 inline-flex mx-5 items-center mt-4">Delete
                   </a>
-                  <a href=""  class="text-indigo-500 inline-flex items-center mt-4">Learn More
+                  <a href="/tickets/{{ project.project_name }}"  class="text-indigo-500 inline-flex items-center mt-4">Learn More
                     <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>

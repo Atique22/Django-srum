@@ -20,6 +20,8 @@ class Ticket(models.Model):
     ticket_title = models.TextField()
     ticket_description = models.TextField()
     ticket_status = models.CharField(choices=STATUS_CHOICES, max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set on creation
+
     
     def __str__(self) -> str:
         return self.ticket_title

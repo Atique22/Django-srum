@@ -26,19 +26,21 @@ def registrationPage(request):
         return render(request, 'account/register.html', content)
 
 def loginPage(request):
-    
-    if request.method == 'POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        
-        user = authenticate(request, username=username ,password=password)
-        if user is not None:
-            print("user login call")
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username or Password is incorrect!')
-            return render(request, 'account/login.html')
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username=request.POST.get('username')
+            password=request.POST.get('password')
+            
+            user = authenticate(request, username=username ,password=password)
+            if user is not None:
+                print("user login call")
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username or Password is incorrect!')
+                return render(request, 'account/login.html')
     return render(request, 'account/login.html')
 
 def logoutUser(request):

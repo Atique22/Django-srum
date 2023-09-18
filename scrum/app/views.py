@@ -11,16 +11,19 @@ from .models import Project, Ticket
 
 
 def registrationPage(request):
-    form = CreateUserForm()
-    if request.method =='POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print("register successfully!")
-            messages.success(request, "Account was created successfully!")
-            return redirect('login')
-    content = {'form': form}
-    return render(request, 'account/register.html', content)
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = CreateUserForm()
+        if request.method =='POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                print("register successfully!")
+                messages.success(request, "Account was created successfully!")
+                return redirect('login')
+        content = {'form': form}
+        return render(request, 'account/register.html', content)
 
 def loginPage(request):
     

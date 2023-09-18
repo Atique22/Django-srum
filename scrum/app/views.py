@@ -30,11 +30,22 @@ def delete_project(request, project_name):
 
 def create_ticket(request):
     if request.method == 'POST':
+        
         form = TicketForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/tickets')  # Redirect to a success page
+            ticket = form.save()
+            project = get_object_or_404(Project, project_name=ticket.project)
+            tickets = Ticket.objects.all()
+            return render(request, 'tickets.html', {'project':project,'tickets':tickets})
     else:
         form = TicketForm()
     
     return render(request, 'index.html', {'form': form})
+
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket:
+         ticket.delete()
+    project = get_object_or_404(Project, project_name=ticket.project)
+    tickets = Ticket.objects.all()
+    return render(request, 'tickets.html', {'project':project,'tickets':tickets})
